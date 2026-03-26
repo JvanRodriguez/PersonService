@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: PersonService
+server:
+  port: 8081
+
+person:
+  persistence:
+    file-path: "persons.txt"
