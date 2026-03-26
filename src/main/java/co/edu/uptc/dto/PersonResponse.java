@@ -2,6 +2,8 @@ package co.edu.uptc.dto;
 
 import co.edu.uptc.Model.Person;
 import lombok.Data;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 @Data
 public class PersonResponse {
@@ -22,6 +24,7 @@ public class PersonResponse {
         this.documentNumber = person.getDocumentNumber();
         this.phoneNumber = person.getPhoneNumber();
         this.message = "OK";
+        this.ipAddress = getContainerIp();
     }
     
     public PersonResponse(PersonDto dto) {
@@ -32,9 +35,19 @@ public class PersonResponse {
         this.documentNumber = dto.getDocumentNumber();
         this.phoneNumber = dto.getPhoneNumber();
         this.message = "OK";
+        this.ipAddress = getContainerIp();
     }
     
     public PersonResponse(String message) {
         this.message = message;
+        this.ipAddress = getContainerIp();
+    }
+    
+    private String getContainerIp() {
+        try {
+            return InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            return "unknown";
+        }
     }
 }
